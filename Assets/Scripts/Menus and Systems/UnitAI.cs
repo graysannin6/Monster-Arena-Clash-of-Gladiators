@@ -11,10 +11,9 @@ public class UnitAI : MonoBehaviour
     [SerializeField] WayPoint wayPoint;
     bool alive = true;
 
-    void Start()
+    void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = wayPoint.transform.position;
     }
 
     void Update()

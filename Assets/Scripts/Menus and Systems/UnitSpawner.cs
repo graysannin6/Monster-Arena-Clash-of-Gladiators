@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitSpawner : MonoBehaviour
 {
-    [SerializeField] int factionID;
+    [SerializeField] int factionID = 0;
     [SerializeField] WayPoint leftWaypoint;
     [SerializeField] WayPoint rightWaypoint;
     
