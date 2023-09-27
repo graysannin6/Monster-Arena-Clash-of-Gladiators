@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class PlayerUnitInterfaceButton : MonoBehaviour, IPointerDownHandler,IPointerUpHandler
+using TMPro;
+using Unity.VisualScripting;
+public class PlayerUnitInterfaceButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] PlayerUnitInterfaceController controller;
+    [SerializeField] CurrencyManager currencyManager;
     [SerializeField] Image image;
     [SerializeField] GameObject unitPrefrab;
+    [SerializeField] TextMeshProUGUI costText;
     [SerializeField] float cost = 0f;
     bool mouseDown = false;
 
+
+    void Start()
+    {
+        if (costText != null)
+        {
+            costText.text = cost.ToString();
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -32,12 +44,14 @@ public class PlayerUnitInterfaceButton : MonoBehaviour, IPointerDownHandler,IPoi
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //if (eventData.button == PointerEventData.InputButton.Left) // Check if left mouse button was clicked
-        //{
-            mouseDown = true;
-            image.color = Color.green;
-            controller.PrepareUnitForSpawn(unitPrefrab, cost);
-        //}
+        if (currencyManager.GetCurrentCurrency() < cost)
+        {
+            return;
+        }
+        mouseDown = true;
+        image.color = Color.green;
+        controller.PrepareUnitForSpawn(unitPrefrab, cost);
+
     }
 
     public void OnPointerUp(PointerEventData eventData)

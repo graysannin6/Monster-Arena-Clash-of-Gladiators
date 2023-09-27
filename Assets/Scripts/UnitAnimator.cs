@@ -30,6 +30,18 @@ public class UnitAnimator : MonoBehaviour
         }
         oldPos = transform.position;
     }
+    public virtual void AnimateGotHit()
+    {
+        animator.SetTrigger("gotHit");
+    }
+    public virtual void AnimateBowAttack()
+    {
+        animator.SetTrigger("bowAttack");
+    }
+    public virtual void AnimateMelleeAttack()
+    {
+        animator.SetTrigger("melleAttack");
+    }
 
     public void AnimateDeath()
     {

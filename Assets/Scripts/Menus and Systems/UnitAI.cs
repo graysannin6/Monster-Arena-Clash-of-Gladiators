@@ -9,6 +9,8 @@ public class UnitAI : MonoBehaviour
     [SerializeField] int factionID = 0;
     NavMeshAgent agent;
     [SerializeField] WayPoint wayPoint;
+    [SerializeField] BoxCollider objectCollider;
+    [SerializeField] float timeToDestroy = 4f;
     bool alive = true;
 
     void Awake()
@@ -43,11 +45,24 @@ public class UnitAI : MonoBehaviour
         wayPoint = startingWaypoint;
         agent.destination = wayPoint.transform.position;
         factionID = faction;
+        GetComponent<UnitCombat>().InitializeCombat(faction);
     }
 
     public void TriggerDeath()
     {
         alive = false;
         unitAnimator.AnimateDeath();
+        agent.destination = transform.position;
+        agent.enabled = false;
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = false;
+        }
+        Destroy(gameObject,timeToDestroy);
+    }
+
+    public int GetFactionID()
+    {
+        return factionID;
     }
 }

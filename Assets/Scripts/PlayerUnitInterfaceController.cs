@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerUnitInterfaceController : MonoBehaviour
 {
-    //[SerializeField] CurrencyManager currencyManager;
+    [SerializeField] CurrencyManager currencyManager;
     [SerializeField] UnitSpawner playerUnitSpawner;
     [SerializeField] GameObject objectSpawnPositionGhost;
     bool isUnitSelected = false;
@@ -46,7 +46,7 @@ public class PlayerUnitInterfaceController : MonoBehaviour
         {
             if (GetMouseRayHitPosition() != Vector3.zero)
             {
-                //currencyManager.SpendCurrency(selectedUnitCost);
+                currencyManager.SpendCurrency(selectedUnitCost);
                 playerUnitSpawner.SpawnUnit(selectedUnit,mouseWorldPoint);
             }
             isUnitSelected = false;
